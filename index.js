@@ -5,10 +5,14 @@ const ObjectId = require('mongodb').ObjectId;
 const app = express()
 app.use(express.json());
 
+function isObjectId(value) {
+  return ObjectId.isValid(value) && typeof value === 'string'
+}
+
 app.get('/crud/:collection', async (req, res) => {
   Object.keys(req.query).map(function(key, index) {
-    req.query[key] = ObjectId.isValid(req.query[key]) ? ObjectId(req.query[key]): req.query[key]
-  });  
+    req.query[key] = isObjectId(req.query[key]) ? ObjectId(req.query[key]): req.query[key]
+  });
 
   dbo.getDb()
     .collection(req.params.collection)
@@ -24,6 +28,10 @@ app.get('/crud/:collection', async (req, res) => {
 })
 
 app.post('/crud/:collection', async (req, res) => {
+  Object.keys(req.body).map(function(key, index) {
+    req.body[key] = isObjectId(req.query[key]) ? ObjectId(req.body[key]): req.body[key]
+  });
+
   dbo.getDb()
     .collection(req.params.collection)
     .insertOne(req.body, function (err, result) {
