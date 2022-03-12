@@ -1,0 +1,15 @@
+# http://docs.python-requests.org/en/master/user/quickstart/
+
+env_file = ''
+
+###env
+BASE_URL="172.19.0.3:3000/crud/{}"
+###env
+
+get(BASE_URL.format("users?name=karl"))
+get(BASE_URL.format("users?_id=622c76a43666f0d40f24db95"))
+
+post(BASE_URL.format("users"), json={
+	"name": "karl"
+})
+

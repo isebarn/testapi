@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    networks:
+      - node-webapp-network    
+    volumes:
+      - mongodb:/data/db
+  node:
+    image: david/testapi
+    restart: always
+    networks:
+      - node-webapp-network    
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    expose:
+      - "3000"
+    restart: on-failure
+
+volumes:
+ mongodb:
+
+networks:
+  node-webapp-network:
+    driver: bridge
