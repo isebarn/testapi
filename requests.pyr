@@ -3,10 +3,11 @@
 env_file = ''
 
 ###env
-BASE_URL="34.136.158.90:3000/crud/{}"
 BASE_URL="127.0.0.1:3000/crud/{}"
+BASE_URL="34.136.158.90:3000/crud/{}"
 ###env
 
+get(BASE_URL.format("users"))
 get(BASE_URL.format("users?name=karl"))
 get(BASE_URL.format("users?_id=622c7c0fa8dd7fd74d9cfa43"))
 
@@ -16,7 +17,14 @@ post(BASE_URL.format("users"), json={
 
 post(BASE_URL.format("contracts"), json={
 	"duration": 1,
-	"user": "622c76a43666f0d40f24db95"
+	"user": "622cd8bb2a9c7eeed601a524"
 })
 
-get(BASE_URL.format("contracts?_id=622cdbe553cbd385a6f592f8"))
+
+
+get(BASE_URL.format("answers"))
+post(BASE_URL.format("answers"), json={
+	"user": "622cd8bb2a9c7eeed601a524",	
+	"question": "622eb63ceb95e0faf4f024fd",
+	"x": 0.5
+})

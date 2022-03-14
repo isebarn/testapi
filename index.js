@@ -1,8 +1,10 @@
 const express = require('express')
+var cors = require('cors')
 const dbo = require('./connection');
 const ObjectId = require('mongodb').ObjectId;
 
 const app = express()
+app.use(cors())
 app.use(express.json());
 
 function isObjectId(value) {
