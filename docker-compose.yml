@@ -3,15 +3,11 @@ services:
   mongodb:
     container_name: mongodb
     image: mongo
-    networks:
-      - node-webapp-network    
     volumes:
       - mongodb:/data/db
   node:
     image: david/testapi
     restart: always
-    networks:
-      - node-webapp-network    
     ports:
       - 3000:3000
     links:
@@ -25,8 +21,6 @@ services:
       MONGO: mongodb://mongodb:27017
   web:
     image: david/testweb
-    networks:
-      - node-webapp-network
     ports: #This is used to map the container’s ports to the host machine.
       - "3001:3000"
 
@@ -39,12 +33,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
       ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017
-    networks:
-      - node-webapp-network
 
 volumes:
  mongodb:
 
-networks:
-  node-webapp-network:
-    driver: bridge
