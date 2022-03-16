@@ -21,7 +21,8 @@ services:
     expose:
       - "3000"
     restart: on-failure
-
+    environment:
+      MONGO: mongodb://mongodb:27017
   web:
     image: david/testweb
     networks:
